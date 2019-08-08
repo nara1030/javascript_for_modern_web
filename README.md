@@ -5,7 +5,7 @@
 - - -
 ## 목차
 1. JavaScript
-	* [개요](https://github.com/nara1030/javascript_for_modern_web/blob/master/docs/part1_outline.md#%EC%A2%80-%EB%8D%94-%EC%9E%90%EC%84%B8%ED%9E%88)
+	* [개요](https://github.com/nara1030/javascript_for_modern_web/blob/master/docs/part1_outline.md)
 	* 기본 문법
 	* 조건문
 	* 반복문
