@@ -6,9 +6,9 @@
 1. [요약](#요약)
 	* [기본용어](#기본용어)
 	* [자료형](#자료형)
-		* 종류
-		* 변환
-		* 연산자
+		* [종류](#종류)
+		* [변환](#변환)
+		* [연산자](#연산자)
 	* [변수](#변수)
 2. [참고](#참고)
 
@@ -53,10 +53,10 @@
 		* 변수와 인스턴스, 함수, 메서드의 이름은 항상 소문자로 시작
 		* 여러 단어로 이루어진 식별자는 각 단어의 첫 글자를 대문자로 작성
 	* 구분
-		* **alert**('Hello World'); → 함수
+		* **alert**('Hello World'); 		→ 함수
 		* Array.**length**					→ 속성
 		* **input**							→ 변수
-		* **prompt**('Message', 'Defstr') → 함수
+		* **prompt**('Message', 'Defstr') 	→ 함수
 		* Math.**PI**						→ 속성
 		* Math.**abs**(-273)				→ 메서드
 * 주석
@@ -90,7 +90,60 @@
 ##### [목차로 이동](#목차)
 		
 ### 자료형
+#### 종류
+* 자바스크립트의 자료형
+	* 책에 의하면 총 여섯 가지 자료형 존재  
+		```javascript
+		<script>
+		// 변수를 선언합니다.
+		var stringVar = 'String';
+		var numberVar = 273;
+		var booleanVar = true;
+		var functionVar = function() { };
+		var objectVar = {};
+		// 추가로 undefiend 자료형이 존재한다.
+		</script>
+		```
+	* [MDN web docs](https://developer.mozilla.org/ko/docs/Web/JavaScript/Data_structures)에 의하면 최신 ECMAScript 표준은 7개의 자료형을 정의
+		* [기본 자료형](#기본-자료형)
+			* Boolean
+			* [Null](#Null-vs-Undefined)
+			* [Undefined](#Null-vs-Undefined)
+			* Number
+			* String
+			* Symbol(ECMAScript6에 추가됨)
+		* 별도로 Object도 존재
 
+##### 기본 자료형
+오브젝트를 제외한 모든 값은 변경 불가능한 값(immutable value)이다. 예를 들자면, 특히 C 언어와는 다르게도, 문자열은 불변값(immutable)이다. 이런 값을 `primitive values`라고 일컫는다.
+
+* Immutable
+	* [자바](https://limkydev.tistory.com/68)
+	* [자바스크립트](http://blog.naver.com/PostView.nhn?blogId=wj8606&logNo=221209820504)
+
+#### Null-vs-Undefined
+.
+	
+##### [목차로 이동](#목차)
+
+#### 변환
+
+
+##### [목차로 이동](#목차)
+
+#### 연산자
+
+
+##### [목차로 이동](#목차)
+
+### 변수
+[자바스크립트](https://developer.mozilla.org/ko/docs/Web/JavaScript/Data_structures)는 `느슨한 타입(loosely typed)` 언어, 혹은 `동적(dynamic)` 언어이다. 그 말은, 변수의 타입을 미리 선언할 필요가 없다는 뜻이다. 타입은 프로그램이 처리되는 과정에서 자동으로 파악될 것이다. 또한 그 말은 같은 변수에 여러 타입의 값을 넣을 수 있다는 뜻이다.
+
+```javascript
+var foo = 42;		// foo는 이제 Number임
+var foo = "bar";	// foo는 이제 String임
+var foo = true;		// foo는 이제 Boolean임
+```
 
 ##### [목차로 이동](#목차)
 
