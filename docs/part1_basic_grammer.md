@@ -53,12 +53,12 @@
 		* 변수와 인스턴스, 함수, 메서드의 이름은 항상 소문자로 시작
 		* 여러 단어로 이루어진 식별자는 각 단어의 첫 글자를 대문자로 작성
 	* 구분
-		* **alert**('Hello World');			→ 함수
-		* Array.**length**					→ 속성
-		* **input**							→ 변수
-		* **prompt('Message', 'Defstr');	→ 함수
-		* Math.**PI**						→ 속성
-		* Math.**abs**(-273)				→ 메서드
+		* **alert**('Hello World');         → 함수
+		* Array.**length**                  → 속성
+		* **input**                         → 변수
+		* **prompt**('Message', 'Defstr')   → 함수
+		* Math.**PI**                       → 속성
+		* Math.**abs**(-273)                → 메서드
 * 주석
 	* 프로그램 코드를 설명하는 데 사용
 	* 프로그램을 진행하는 데 전혀 영향을 주지 않음
