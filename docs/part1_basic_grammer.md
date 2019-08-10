@@ -113,10 +113,12 @@
 			* [Null](#Null-vs-Undefined)
 			* [Undefined](#Null-vs-Undefined)
 			* Number
-			* String
+			* [String](#String)
 			* Symbol(ECMAScript6에 추가됨)
 		* 별도로 Object도 존재
 
+##### [목차로 이동](#목차)
+		
 ##### 기본 자료형
 오브젝트를 제외한 모든 값은 변경 불가능한 값(immutable value)이다. 예를 들자면, 특히 C 언어와는 다르게도, 문자열은 불변값(immutable)이다. 이런 값을 `primitive values`라고 일컫는다.
 
@@ -124,6 +126,8 @@
 	* [자바](https://limkydev.tistory.com/68)
 	* [자바스크립트](http://blog.naver.com/PostView.nhn?blogId=wj8606&logNo=221209820504)
 
+##### [목차로 이동](#목차)
+	
 ##### Null-vs-Undefined
 * 공통점
 	* 둘 다 데이터 타입이자, 값(`값이 없음`을 나타냄)임
@@ -133,21 +137,38 @@
 	* 예
 		* undefined  
 			```javascript
-			var foo;	// foo 변수에 undefined가 할당
+			var foo;		// foo 변수에 undefined가 할당
 			```
 		* null  
 			```javascript
 			var foo = null;	// foo 변수에 null가 할당
 			```
 * 비교  
-	<img src="../img/null_vs_undefined.png" width="300" height="250"> 
+	<img src="../img/null_vs_undefined.png" width="400" height="250"> 
+
+##### [목차로 이동](#목차)
 	
+##### String
+문자열을 복잡한 자료형을 표현하는 용도로 쓰는 방법이 꽤나 매력적일 수 있다. **단기적으로** [이런 장점들](https://developer.mozilla.org/ko/docs/Web/JavaScript/Data_structures)이 있다.
+
+* 문자열은 디버깅이 쉽다(화면에 출력한 내용이 문자열 변수에 있는 값과 같다)
+* 문자열은 많은 API에서 사용하는 공통분모이고(입력 필드, 로컬 스토리지 값, `XMLHttpRequest` 요청에서 `responseText`를 사용할 때 등) 그러다보니 문자열만으로 작업하는게 매혹적일 수 있다
+
+규칙만 잘 정의해놓는다면, 어떤 자료구조가 되던 문자열로 표시할 수 있지만 그렇다고 해서 이게 좋은 방법이 되는 건 아니다. 예를 들자면, 구분자로 리스트 자료형을 흉내낼 수 있을 것이다(하지만 자바스크립트의 배열을 사용하는게 더 알맞을 것이다).
+
+* 참고
+	* [XMLHttpRequest](https://developer.mozilla.org/ko/docs/Web/API/XMLHttpRequest)
+
 ##### [목차로 이동](#목차)
 
 #### 변환
-* 불 자료형 변환
-* 숫자와 문자열 자료형 변환
+느슨한 타입의 언어기 때문에 변환을 고려해야 하고, 일치 연산자(`==` 혹은 `===`)도 구분해서 사용해야 한다.
 
+* [자바스크립트에서 **불 자료형 변환이** false로 간주되는 것들](https://studymake.tistory.com/484)
+	* 불 자료형 변환을 하지 않은 것은 결과가 다를 수 있음
+* 숫자와 문자열 자료형 변환
+	* [추후 추가]()
+	
 ##### [목차로 이동](#목차)
 
 #### 연산자
