@@ -198,7 +198,11 @@
 ##### [목차로 이동](#목차)
 
 ### 변수
-[자바스크립트](https://developer.mozilla.org/ko/docs/Web/JavaScript/Data_structures)는 `느슨한 타입(loosely typed)` 언어, 혹은 `동적(dynamic)` 언어이다. 그 말은, 변수의 타입을 미리 선언할 필요가 없다는 뜻이다. 타입은 프로그램이 처리되는 과정에서 자동으로 파악될 것이다. 또한 그 말은 같은 변수에 여러 타입의 값을 넣을 수 있다는 뜻이다.
+* 변수란 주소의 별칭
+* [자바스크립트](https://developer.mozilla.org/ko/docs/Web/JavaScript/Data_structures)는 `느슨한 타입(loosely typed)` 언어, 혹은 `동적(dynamic)` 언어임
+	* 그 말은, 변수의 타입을 미리 선언할 필요가 없다는 의미
+		* 타입은 프로그램이 처리되는 과정에서 자동으로 파악
+	* 또한 그 말은 같은 변수에 여러 타입의 값을 넣을 수 있다는 의미
 
 ```javascript
 var foo = 42;		// foo는 이제 Number임
