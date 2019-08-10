@@ -64,31 +64,32 @@
 * 주석
 	* 프로그램 코드를 설명하는 데 사용
 	* 프로그램을 진행하는 데 전혀 영향을 주지 않음
-	* HTML 주석  
-		```html
-		<!DOCTYPE html>
-		<html>
-		<head>
-			<!-- 주석입니다. -->
+	* 예
+		* HTML 주석  
+			```html
+			<!DOCTYPE html>
+			<html>
+			<head>
+				<!-- 주석입니다. -->
+				<script>
+				</script>
+			</head>
+			<body>
+				<!-- <h1>주석입니다.</h1> -->
+			</body>
+			</html>
+			```
+		* 자바스크립트 주석  
+			```javascript
 			<script>
+				// 주석은 코드 실행에 아무 영향을 미치지 않습니다.
+				/*
+				alert('Hello JavaScript');
+				alert('Hello JavaScript');
+				alert('Hello JavaScript');
+				*/
 			</script>
-		</head>
-		<body>
-			<!-- <h1>주석입니다.</h1> -->
-		</body>
-		</html>
-		```
-	* 자바스크립트 주석  
-		```javascript
-		<script>
-			// 주석은 코드 실행에 아무 영향을 미치지 않습니다.
-			/*
-			alert('Hello JavaScript');
-			alert('Hello JavaScript');
-			alert('Hello JavaScript');
-			*/
-		</script>
-		```
+			```
 ##### [목차로 이동](#목차)
 		
 ### 자료형
@@ -123,18 +124,54 @@
 	* [자바](https://limkydev.tistory.com/68)
 	* [자바스크립트](http://blog.naver.com/PostView.nhn?blogId=wj8606&logNo=221209820504)
 
-#### Null-vs-Undefined
-.
+##### Null-vs-Undefined
+* 공통점
+	* 둘 다 데이터 타입이자, 값(`값이 없음`을 나타냄)임
+* 차이점
+	* undefined는 변수만 선언하더라도 할당되지만 null은 변수를 선언한 후에 null로 값을 바꿈
+		* 즉, null은 아무 것도 없는 값이 저장되어 있는 것이고 undefined는 값이 저장되어 있지 않은 것임
+	* 예
+		* undefined  
+			```javascript
+			var foo;	// foo 변수에 undefined가 할당
+			```
+		* null  
+			```javascript
+			var foo = null;	// foo 변수에 null가 할당
+			```
+* 비교  
+	<img src="./img/null_vs_undefined.png" width="300" height="250"> 
 	
 ##### [목차로 이동](#목차)
 
 #### 변환
-
+* 불 자료형 변환
+* 숫자와 문자열 자료형 변환
 
 ##### [목차로 이동](#목차)
 
 #### 연산자
-
+* 피연산자의 종류에 따라 연산자의 특성이 달라짐  
+	```JavaScript
+	<script>
+		// 1번 문제
+		var value = 10;
+		value += 20;
+		alert(value);
+		
+		// 2번 문제
+		var value = 'Hello' + '..!';
+		alert(value + ' JavaScript');
+	</script>
+	```
+* 자료형 검사
+	* 단항 연산자인 `typeof` 사용
+	* 괄호를 사용해서 범위를 명확히 하는 것을 권장(함수와 비슷한 생김새 때문에 오해)  
+		```javascript
+		typeof 1 + '문자열'
+		typeof(1 + '문자열')
+		typeof(1) + '문자열'
+		```
 
 ##### [목차로 이동](#목차)
 
@@ -147,9 +184,11 @@ var foo = "bar";	// foo는 이제 String임
 var foo = true;		// foo는 이제 Boolean임
 ```
 
+자바스크립트는 위처럼 기존에 존재하는 변수를 재선언할 수 있다.
+
 ##### [목차로 이동](#목차)
 
 ## 참고
-
+* [MDN 자바스크립트 가이드](https://developer.mozilla.org/ko/docs/Web/JavaScript)
 
 ##### [목차로 이동](#목차)
