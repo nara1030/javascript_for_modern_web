@@ -54,12 +54,12 @@
 		* 여러 단어로 이루어진 식별자는 각 단어의 첫 글자를 대문자로 작성
 	* 구분  
 		```javascript
-		alert('Hello World');			// 함수(alert)
-		Array.length;					// 속성(length)
+		alert('Hello World');	// 함수(alert)
+		Array.length;	// 속성(length)
 		input							// 변수
 		prompt('Message', 'Defstr');	// 함수(prompt)
-		Math.PI							// 속성(PI)
-		Math.abs(-273);					// 메서드(abs)
+		Math.PI	// 속성(PI)
+		Math.abs(-273);	// 메서드(abs)
 		```
 * 주석
 	* 프로그램 코드를 설명하는 데 사용
