@@ -140,7 +140,7 @@
 			var foo = null;	// foo 변수에 null가 할당
 			```
 * 비교  
-	<img src="./img/null_vs_undefined.png" width="300" height="250"> 
+	<img src="../img/null_vs_undefined.png" width="300" height="250"> 
 	
 ##### [목차로 이동](#목차)
 
