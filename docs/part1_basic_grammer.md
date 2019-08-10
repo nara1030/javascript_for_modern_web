@@ -56,7 +56,7 @@
 		```javascript
 		alert('Hello World');		// 함수(alert)
 		Array.length;			// 속성(length)
-		input					// 변수
+		input				// 변수
 		prompt('Message', 'Defstr');	// 함수(prompt)
 		Math.PI			// 속성(PI)
 		Math.abs(-273);		// 메서드(abs)
