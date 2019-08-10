@@ -2,7 +2,10 @@
 =====
 책과 [강의](https://www.youtube.com/watch?v=4hCiz6aU-7Q&list=PLBXuLgInP-5kLy13XLuK8iBWVFDBJygYr&index=2)를 듣고 이해한 바를 기록하기 위한 공간입니다.  
 책에 있는 목차 위주로 공부하되, 그대로 적기보단 머리 속에서 이해된 바를 기록, 수정해나갈 계획입니다.  
-추가로 [다음 링크](https://developer.mozilla.org/ko/docs/Web/JavaScript)에서 튜토리얼 등 자바스크립트 관련 여러 정보를 얻을 수 있다.
+
+* 참고
+	* [MDN 자바스크립트 문서](https://developer.mozilla.org/ko/docs/Web/JavaScript)
+	* [서울 오픈데이터](https://data.seoul.go.kr/)
 - - -
 ## 목차
 1. JavaScript
