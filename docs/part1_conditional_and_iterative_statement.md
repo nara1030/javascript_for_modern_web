@@ -220,7 +220,40 @@ while 반복문이 조건에 비중을 두는 반복문이라면, for 반복문�
 			<문장>
 		}
 		```
+	* 예  
+		```javascript
+		<script>
+			var array = ['포도', '사과', '바나나', '망고'];
+			
+			for(var i in array) {
+				alert(array[i]);
+			}
+		</script>
+		```
 	* 사용 이유
+		* 자바스크립트는 배열(~~배열이 객체이긴 하지만 이렇게 표현함~~)이나 객체를 더욱 쉽게 다룰 수 있게 for in 반복문 제공
+			* 단, 자바([향상된 for문](https://library1008.tistory.com/66))와 다르게 변수의 요소가 아닌 인덱스를 빼서 온다는 특징이 있음
+				* 자바의 향상된 for문은 Read only임(수정 불가)
+		* for of 반복문
+			* 반복 변수에 인덱스가 아닌 요소가 들어가도록 ECMAScript 6에서 추가(모든 버전의 인터넷 익스플로러에서 사용 불가)
+			* 비교
+				* for in 반복문 - ECMAScript 5  
+					```javascript
+					<script>
+						var array = [1, 2, 3, 4];
+						for(var i in array) {
+							alert(i + "번째 요소는 " + array[i] + "입니다.");
+						}
+					</script>
+					```
+				* for of 반복문 - ECMAScript 6  
+					```javascript
+					<script>
+						for(const element of [1, 2, 3, 4]){
+							alert(``요소는 ${element}입니다.``); // 템플릿 문자열 - ECMAScript 6
+						}
+					</script>
+					```
 
 ##### [목차로 이동](#목차)
 
