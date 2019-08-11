@@ -236,6 +236,16 @@ while 반복문이 조건에 비중을 두는 반복문이라면, for 반복문�
 				* 자바의 향상된 for문은 Read only임(수정 불가)
 		* for of 반복문
 			* 반복 변수에 인덱스가 아닌 요소가 들어가도록 ECMAScript 6에서 추가(모든 버전의 인터넷 익스플로러에서 사용 불가)
+				* for of 반복문은 배열 이외에도 다양한 것(문자열, 맵, 세트 등)과 조합해서 사용할 수 있음  
+					```javascript
+					// for of문
+					for(variable of iterable) {
+						statement
+					}
+					
+					// for in문
+					for (variable in object) { ... }
+					```
 			* 비교
 				* for in 반복문 - ECMAScript 5  
 					```javascript
@@ -250,13 +260,27 @@ while 반복문이 조건에 비중을 두는 반복문이라면, for 반복문�
 					```javascript
 					<script>
 						for(const element of [1, 2, 3, 4]){
-							alert(``요소는 ${element}입니다.``); // 템플릿 문자열 - ECMAScript 6
+							alert(`요소는 ${element}입니다.`); // 템플릿 문자열 - ECMAScript 6
 						}
 					</script>
 					```
+			* 단, for of 반복문은 현재 몇 번 반복했는지 알 수 없음
+				* 따라서 따로 변수를 만들어서 확인해야 함  
+			```javascript
+			<script>
+				let i = 0;
+				for(const element of [1, 2, 3, 4]) {
+					alert(`${i}번째 요소는 ${element}입니다.`);
+					i++;
+				}
+			</script>
+			```
 
 ##### [목차로 이동](#목차)
 
 ## 참고
+* 반복문 비교
+	* [for ... of](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/for...of)
+	* [for ... in](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/for...in)
 
 ##### [목차로 이동](#목차)
