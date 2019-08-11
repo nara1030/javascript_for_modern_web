@@ -11,8 +11,7 @@
 1. JavaScript
 	* [개요](https://github.com/nara1030/javascript_for_modern_web/blob/master/docs/part1_outline.md)
 	* [기본 문법](https://github.com/nara1030/javascript_for_modern_web/blob/master/docs/part1_basic_grammer.md)
-	* 조건문
-	* 반복문
+	* 조건문과 반복문
 	* 함수
 	* 객체
 	* 생성자 함수
