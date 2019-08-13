@@ -7,7 +7,7 @@
 	* [MDN 자바스크립트 문서](https://developer.mozilla.org/ko/docs/Web/JavaScript)
 	* [서울 오픈데이터](https://data.seoul.go.kr/)
 		* [서울시 직장인의 출퇴근 트렌드 변화](https://news.naver.com/main/read.nhn?mode=LSD&mid=sec&sid1=101&oid=025&aid=0002928968)
-	* [생활코딩](https://opentutorials.org/module/2503/14051)
+	* [생활코딩](https://opentutorials.org/course/2473)
 - - -
 ## 목차
 1. JavaScript
