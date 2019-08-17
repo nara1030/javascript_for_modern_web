@@ -43,7 +43,7 @@
 		* 하지만 `함수 호이스팅`은 함수 선언과 함께 작동하고 함수 표현식에서는 동작 않음  
 			```javascript
 			console.log(square);		// square는 초기값으로 undefined를 가지고 호이스트된다.
-			console.log(square(5));		// TypeError: square는 함수가 아니다.
+			console.log(square(5));	// TypeError: square는 함수가 아니다.
 			square = function(n) {
 				return n * n;
 			}
