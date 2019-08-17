@@ -84,8 +84,8 @@
 			// 익명 함수(함수 표현식)로 정의된 함수를 인자로 받아,
 			// 2번째 인자인 배열의 모든 요소에 대해 함수 실행
 			function map(f, a) {
-				var result = []; // Create a new Array
-				var i;	// Declare variable
+				var result = [];	// Create a new Array
+				var i;				// Declare variable
 				for(i = 0; i != a.length; i++) {
 					result[i] = f(a[i]);
 				}
