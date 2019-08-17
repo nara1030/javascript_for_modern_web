@@ -304,9 +304,21 @@
 						* 변수 스코프를 제어하는데 사용하며, 변수가 코드 외부로 노출되지 않게 해줌
 							* 이런 이유로 자바스크립트 플러그인 개발에 유용하게 활용
 						* 다른 개발자에게 영향을 주지 않기 위한 의도  
-					```javascript
-					
-					```
+							```javascript
+							(function() {
+								var private_var = "private";
+							})();
+							
+							// 변수 private_var가 선언되지 않았다는 에러가 출력된다.
+							console.log(private_var);
+							```
+					* 활용
+						* 변수 덮어쓰기를 차단해야 하는 사례로 다음 코드처럼 `$` 파라미터를 사용하는 자기 실행 익명 함수로 jQuery 변수를 전달하면 함수 내에서 `$`가 프로토타입 라이브러리에 의해 바뀌는 것을 방지 가능  
+							```javascript
+							(function($) {
+								console.log($);
+							})(jQuery);
+							```
 * 콜백 지옥 → Promise
 	* 콜백 함수
 	* 추후
