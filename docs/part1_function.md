@@ -98,7 +98,7 @@
 			
 			var numbers = [0, 1, 2, 5, 10];
 			var cube = map(f, numbers);
-			console.log(cube);
+			console.log(cube);		// 결과: [0, 1, 8, 125, 1000]
 			```
 		* ㅇ
 
