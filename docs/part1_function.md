@@ -49,7 +49,7 @@
 		```
 		* 이름이 있는 함수를 `선언적 함수`라 부름
 * 차이점
-	* 웹 브라우저는 script 태그 내부의 내용을 한 줄씩 읽기 전에 선언적 함수부터 읽음
+	* 실행 순서: 웹 브라우저는 script 태그 내부의 내용을 한 줄씩 읽기 전에 선언적 함수부터 읽음
 		* 익명 함수의 재정의 - 오류 발생  
 			```javascript
 			<script>
@@ -78,6 +78,29 @@
 			</script>
 			```
 			* 실행 결과는 함수 A가 출력됨
+	* 사용
+		* 익명 함수는 함수를 다른 함수의 매개변수로 전달할 때 편리  
+			```javascript
+			// 익명 함수(함수 표현식)로 정의된 함수를 인자로 받아,
+			// 2번째 인자인 배열의 모든 요소에 대해 함수 실행
+			function map(f, a) {
+				var result = [];	// Create a new Array
+				var i;	// Declare variable
+				for(i = 0; i != a.length; i++) {
+					result[i] = f(a[i]);
+				}
+				return result;
+			}
+			
+			var f = function(x) {	// 익명 함수
+				return x * x * x;
+			}
+			
+			var numbers = [0, 1, 2, 5, 10];
+			var cube = map(f, numbers);
+			console.log(cube);
+			```
+		* ㅇ
 
 * 참고
 	* 웹 브라우저 내장 함수들의 소스코드는 볼 수 없게 막아놓음  
@@ -179,7 +202,12 @@
 			* 따라서 pythagoras() 함수 외부에서는 square() 함수 사용 불가
 			* 추가
 				* jQuery는 선언적 함수 대부분을 내부 함수로 작성!
-				* 자기 호출 함수
+				* 자기 호출 함수(자기 실행 익명 함수)
+					* 함수를 생성하자마자 호출
+						* 다른 개발자에게 영향을 주지 않기 위한 의도  
+					```javascript
+					
+					```
 * 콜백 지옥 → Promise
 	* 콜백 함수
 	* 추후
@@ -195,5 +223,6 @@
 ##### [목차로 이동](#목차)
 
 ## 참고
+* [MDN - 함수 가이드](https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/%ED%95%A8%EC%88%98)
 
 ##### [목차로 이동](#목차)
