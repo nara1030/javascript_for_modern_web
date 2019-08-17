@@ -85,14 +85,14 @@
 			// 2번째 인자인 배열의 모든 요소에 대해 함수 실행
 			function map(f, a) {
 				var result = [];	// Create a new Array
-				var i;				// Declare variable
+				var i;			// Declare variable
 				for(i = 0; i != a.length; i++) {
 					result[i] = f(a[i]);
 				}
 				return result;
 			}
 			
-			var f = function(x) {	// 익명 함수
+			var f = function(x) {		// 익명 함수
 				return x * x * x;
 			}
 			
