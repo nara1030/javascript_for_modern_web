@@ -585,5 +585,8 @@ DB나 API 연동 없이 유저 ID를 인자로 받아 유저 객체를 리턴하
 - - -
 * [Blocking-NonBlocking-Synchronous-Asynchronous](https://homoefficio.github.io/2017/02/19/Blocking-NonBlocking-Synchronous-Asynchronous/)
 * [Java8 CompletableFuture 사용하기](https://www.hungrydiver.co.kr/bbs/detail/develop?id=2&scroll=comment)
+* [Java NIO는 생각만큼 non-blocking 하지 않다](https://homoefficio.github.io/2016/08/06/Java-NIO%EB%8A%94-%EC%83%9D%EA%B0%81%EB%A7%8C%ED%81%BC-non-blocking-%ED%95%98%EC%A7%80-%EC%95%8A%EB%8B%A4/)
+* [멈추지 않고 기다리기(Non-blocking)와 비동기(Asynchronous) 그리고 동시성(Concurrency)](https://tech.peoplefund.co.kr/2017/08/02/non-blocking-asynchronous-concurrency.html)
+* [논 블로킹 알고리즘](https://parkcheolu.tistory.com/33)
 
 ##### [목차로 이동](#목차)
