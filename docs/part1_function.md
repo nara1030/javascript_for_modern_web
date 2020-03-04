@@ -100,7 +100,7 @@
 	// A nested function example
 	function getScore() {
 		var num1 = 2,
-		 num2 = 3;
+		  num2 = 3;
 		
 		function add() {
 			return name + " scored " + (num1 + num2);
