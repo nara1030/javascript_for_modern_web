@@ -10,6 +10,8 @@
 	* [종류](#종류)
 	* [이슈](#이슈)
 2. [심화](#심화)
+	* [콜백함수](#콜백함수)
+	* [클로저](#클로저)
 3. [참고](#참고)
 
 ## 개요
@@ -124,13 +126,13 @@ getScore();		// Return "Chamahk scored 5"
 
 ### 종류
 * 두 가지로 구분
-	* 익명 함수  
+	1. 익명 함수  
 		```javascript
 		var 함수 = function() { };
 		```
 		* 함수지만 이름이 없으므로 `익명 함수`라 부름
 		* 이름이 없기 때문에 변수에 넣어 사용해야 함
-	* 선언적 함수  
+	2. 선언적 함수  
 		```javascript
 		function 함수() {
 		
@@ -302,7 +304,7 @@ getScore();		// Return "Chamahk scored 5"
 			```
 			* [내부 함수는 내부 함수를 포함하는 함수에서만 사용 가능](#함수의-범위)
 			* 따라서 pythagoras() 함수 외부에서는 square() 함수 사용 불가
-			* 추가
+			* ~~추가~~ → 추후 정리
 				* jQuery는 선언적 함수 대부분을 내부 함수로 작성!
 				* 자기 호출 함수([자기 실행 익명 함수](https://fedev.tistory.com/26))
 					* 개념
@@ -327,26 +329,152 @@ getScore();		// Return "Chamahk scored 5"
 								console.log($);
 							})(jQuery);
 							```
-* 콜백 지옥 → Promise
-	* 콜백 함수
-	* 추후
-		* [링크1](https://librewiki.net/wiki/%EC%BD%9C%EB%B0%B1_%EC%A7%80%EC%98%A5)
-		* [링크2](https://medium.com/dream-youngs/callback-%EC%A7%80%EC%98%A5-%EA%B3%BC-%EA%B7%B8-%ED%95%B4%EA%B2%B0-2ab583b7607a)
-
 
 ##### [목차로 이동](#목차)
 
 ## 심화
-* 범위와 함수 스택
-	* 재귀
-	* 중첩된 함수와 클로저
-		* 변수의 보존
-		* 다중 중첩 함수
-		* 이름 충돌
+### 콜백함수
+#### 콜백함수란
+```javascript
+// 익명 함수를 매개변수로 전달
+<script>
+    // 함수 선언
+    function callTenTimes(callback) {
+        for(var i = 0; i < 10; i++) {
+            callback();
+        }
+    }
+
+    // 변수 선언
+    var callback = function () {
+        alert('함수 호출');
+    };
+
+    // 함수 호출
+    callTenTimes(callback);
+</script>
+```
+
+이처럼 **콜백함수**란 매개변수로 전달하는 함수를 말한다(∵ 자바스크립트에선 함수도 하나의 자료형이므로 매개변수로 전달 가능). 추가로 위 코드를 다음과 같이 리팩토링할 수 있다.
+
+```javascript
+// 익명 함수를 매개변수로 전달
+<script>
+    // 함수 선언
+    function callTenTimes(callback) {
+        for(var i = 0; i < 10; i++) {
+            callback();
+        }
+    }
+
+    // 함수 호출
+    callTenTimes(function () {
+        alert('함수 호출');
+    });
+</script>
+```
+
+##### [목차로 이동](#목차)
+
+#### 필요성
+다음 자바스크립트 코드의 실행 순서를 예측 해보자.
+
+* 예제 1  
+	```javascript
+	<script>
+		alert('A');
+		setTimeout(function () {
+			alert('B');
+		}, 0);
+		alert('C');
+	</script>
+	```
+	* 실행 결과: A → C → B
+* 예제 2  
+	```javascript
+	<script>
+		for (var i = 0; i < 3; i++) {
+			setTimeout(function () {
+				alert(i);
+			}, 0);
+		}
+	</script>
+	```
+	* 실행 결과: 3 → 3 → 3
+
+위 코드의 결과를 이해하기 위해 아래 내용을 알아야 한다.
+
+* JavaScript 엔진은 Single Thread임
+	* ∴ 동시에 두 가지 작업 불가
+* JavaScript 엔진은 비동기 처리가 가능하도록 설계됨
+* .
+
+- - -
+
+* 콜백함수를 사용하는 이유는 비동기 처리를 하기 위함
+	* 자바스크립트의 비동기 처리란, 특정 코드가 종료되지 않은 상태더라도 대기 않고 다음 코드를 실행하는 특성
+	* 서버에 대한 응답을 언제까지 기다릴 수 없기 때문에 비동기 처리가 필요
+* 즉, 콜백함수는 특정 이벤트 발생 후 수행될 함수를 의미
+
+
+
+##### [목차로 이동](#목차)
+
+### 클로저
+```javascript
+<script>
+    // 함수 선언
+    function test(name) {
+        var output = 'Hello ' + name + ' .. !';
+    }
+
+    // 출력
+    alert(output);
+</script>
+```
+
+지역 변수의 유효 범위 문제로 인해 다음 코드는 실행되지 않는다(∵ 함수 안에 있는 변수는 지역 변수이므로 함수 외부 사용 불가). 하지만 아래와 같이 **클로저**를 사용하면 이 문제를 해결할 수 있다.
+
+```javascript
+<script>
+    // 함수 선언
+    function test(name) {
+        var output = 'Hello ' + name + ' .. !';
+        return function () {
+            alert(output);
+        }
+    }
+
+    // 출력
+    test('JavaScript')();
+</script>
+```
+
+즉, 이처럼 살아남은 지역 변수(`output`) 혹은 리턴된 함수 자체(`test()`)를 클로저라고 부른다. 중요한 것은 지역 변수 output을 남겨둔다고 외부에서 마음대로 사용할 수 있는 것은 아니라는 점이다. 반드시 리턴된 클로저 함수를 사용해야 지역 변수(`output`)를 사용할 수 있다(∵ 클로저 함수로 인해 남은 지역 변수는 클로저 함수 각각의 고유 변수).
+
+```javascript
+<script>
+    // 함수 선언
+    function test(name) {
+        var output = 'Hello ' + name + ' .. !';
+        return function () {
+            alert(output);
+        }
+    }
+    
+    // 변수 선언
+    var test_1 = test('Web');
+    var test_2 = test('JavaScript');
+
+    // 함수 호출
+    test_1();
+    test_2();
+</script>
+```
 
 ##### [목차로 이동](#목차)
 
 ## 참고
-* [MDN - 함수 가이드](https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/%ED%95%A8%EC%88%98)
+* [JavaScript 핵심 개념 알아보기 - JS Flow](https://www.inflearn.com/course/%ED%95%B5%EC%8B%AC%EA%B0%9C%EB%85%90-javascript-flow/dashboard)
 
 ##### [목차로 이동](#목차)
