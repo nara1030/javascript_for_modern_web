@@ -1,6 +1,7 @@
 함수
 =====
-[강의](https://www.youtube.com/watch?v=FOli-PU8tTo&list=PLBXuLgInP-5kLy13XLuK8iBWVFDBJygYr&index=3)는 링크를 통해 확인할 수 있다.
+* [강의 링크](https://www.youtube.com/watch?v=FOli-PU8tTo&list=PLBXuLgInP-5kLy13XLuK8iBWVFDBJygYr&index=3)
+* MDN web docs [함수](https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/%ED%95%A8%EC%88%98)
 - - -
 ## 목차
 1. [개요](#개요)
@@ -82,13 +83,14 @@
 * 함수의 범위
 	* 함수가 정의된 범위 내에서 정의된 모든 변수나 함수는 액세스 가능
 		* 즉, 전역 함수는 모든 전역 변수를 액세스 가능
-		* 다른 함수 내에 정의된 함수는 부모 함수와 부모 함수가 액세스할 수 있는 다른 변수에 정의된 모든 변수 액세스 가능
-	* 함수 내에서 정의된 변수는 변수가 함수의 범위에서만 정의되어 있기 때문에, 함수 외부에서 액세스 가능  
+	* 다른 함수 내에 정의된 함수는 부모 함수와 부모 함수가 액세스할 수 있는 다른 변수에 정의된 모든 변수 액세스 가능
+	* 함수 내에서 정의된 변수는 변수가 함수의 범위에서만 정의되어 있기 때문에, 함수 외부에서 액세스 가능(?)
+		* [전역변수와 지역변수](https://www.codingfactory.net/10401)
 	```javascript
 	// The following variables are defined in the global scope
 	var num1 = 20,
-		num2 = 3,
-		name = "Chamahk";
+	    num2 = 3,
+	    name = "Chamahk";
 	
 	// This function is defined in the global scope
 	function multiply() {
@@ -103,7 +105,7 @@
 		    num2 = 3;
 		
 		function add() {
-			return name + " scored " + (num1 + num2);
+		    return name + " scored " + (num1 + num2);
 		}
 		
 		return add();
