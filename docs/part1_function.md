@@ -12,6 +12,7 @@
 2. [심화](#심화)
 	* [콜백함수](#콜백함수)
 	* [클로저](#클로저)
+	* [프로미스](#프로미스)
 3. [참고](#참고)
 
 ## 개요
@@ -304,31 +305,6 @@ getScore();		// Return "Chamahk scored 5"
 			```
 			* [내부 함수는 내부 함수를 포함하는 함수에서만 사용 가능](#함수의-범위)
 			* 따라서 pythagoras() 함수 외부에서는 square() 함수 사용 불가
-			* ~~추가~~ → 추후 정리
-				* jQuery는 선언적 함수 대부분을 내부 함수로 작성!
-				* 자기 호출 함수([자기 실행 익명 함수](https://fedev.tistory.com/26))
-					* 개념
-						* 함수를 생성하자마자 호출
-						* 즉, 함수명을 지정하거나 함수를 변수에 저장하지도 않고 함수를 바로 실행
-					* 필요성
-						* 변수 스코프를 제어하는데 사용하며, 변수가 코드 외부로 노출되지 않게 해줌
-							* 이런 이유로 자바스크립트 플러그인 개발에 유용하게 활용
-						* 다른 개발자에게 영향을 주지 않기 위한 의도  
-							```javascript
-							(function() {
-								var private_var = "private";
-							})();
-							
-							// 변수 private_var가 선언되지 않았다는 에러가 출력된다.
-							console.log(private_var);
-							```
-					* 활용
-						* 변수 덮어쓰기를 차단해야 하는 사례로 다음 코드처럼 `$` 파라미터를 사용하는 자기 실행 익명 함수로 jQuery 변수를 전달하면 함수 내에서 `$`가 프로토타입 라이브러리에 의해 바뀌는 것을 방지 가능  
-							```javascript
-							(function($) {
-								console.log($);
-							})(jQuery);
-							```
 
 ##### [목차로 이동](#목차)
 
@@ -377,46 +353,126 @@ getScore();		// Return "Chamahk scored 5"
 ##### [목차로 이동](#목차)
 
 #### 필요성
-다음 자바스크립트 코드의 실행 순서를 예측 해보자.
+DB나 API 연동 없이 유저 ID를 인자로 받아 유저 객체를 리턴하는 함수를 생각해보자(→ 유저 데이터 조회).
 
-* 예제 1  
+* 콜백함수 미사용  
 	```javascript
 	<script>
+	    function findUser(id) {
+			const user = {
+				id: id,
+				name: "User" + id,
+				email: id + "@test.com"
+			};
+			return user;
+		}
+
+		const user = findUser(1);
+		console.log("user:", user);
+	</script>
+	```
+* 콜백함수 사용  
+	```javascript
+	<script>
+		function findUserAndCallBack(id, cb) {
+			const user = {
+				id: id,
+				name: "User" + id,
+				email: id + "@test.com"
+			};
+			cb(user);
+		}
+
+		findUserAndCallBack(1, function(user) {
+			console.log("user:", user);   
+		});
+	</script>
+	```
+
+위 코드의 실행 결과는 아래와 같이 동일하다. 단지 `findUser()` 함수는 결과값을 리턴하고 함수 외부에서 결과값을 이용하여 작업을 수행하는 반면, `findUserAndCallBack()` 함수는 결과값을 이용해 해야할 작업까지 함수 내부에서 수행해주기 때문에 결과값을 리턴할 필요가 없는 것이다(∵ 자바스크립트에서는 함수도 하나의 값이므로 콜백 함수와 같이 함수의 인자로 넘길 수 있음).
+
+<img src="../img/ch_05_01.png" width="350" height="50"></br>
+
+그렇다면 콜백 함수는 단지 스타일의 차이일까? 아니다. 자바스크립트 특유의 비동기 처리[1]를 하기 위해서는 콜백 함수가 필요하다[2]. 만약 실제 프로젝트에서 DB나 API를 통해 유저 데이터를 얻어 오는 경우를 생각해 위 코드를 수정해보자. 필연적으로 발생하는 Latency를 가정하기 위해 `setTimeout()` 함수를 사용했다.
+
+* 콜백함수 미사용  
+	```javascript
+	<script>
+		function findUser(id) {
+			let user;
+			setTimeout(function() {
+				console.log("Wait 0.1 sec.");
+				user = {
+					id: id,
+					name: "User" + id,
+					email: id + "@test.com"
+				};
+			}, 100);
+			return user;
+		}
+
+		const user = findUser(1);
+		console.log("user:", user);
+	</script>
+	```
+	* 실행 결과  
+		<img src="../img/ch_05_02.png" width="350" height="100"></br>
+		* `setTimeout()`[3]은 비동기 함수의 호출이므로 실행이 완료될 때까지 기다리지 않고 user 반환
+		* ∴ `findUser(1)`은 undefined를 리턴
+* 콜백함수 사용  
+	```javascript
+	<script>
+		function findUserAndCallBack(id, cb) {
+			setTimeout(function() {
+				console.log("Wait 0.1 sec.");
+				const user = {
+					id: id,
+					name: "User" + id,
+					email: id + "@test.com"
+				};
+				cb(user);
+			}, 100);
+		}
+
+		findUserAndCallBack(1, function(user) {
+			console.log("user:", user);   
+		});
+	</script>
+	```
+	* 실행 결과  
+		<img src="../img/ch_05_03.png" width="350" height="100"></br>
+		* 함수(`findUserAndCallBack()`)로부터 결과값을 리턴받기를 포기하고, 결과값을 이용해서 처리할 로직을 콜백 함수에 담아 인자로 넘김
+		* 이와 같이 비동기 함수(`setTimeout()`)를 호출할 때는 결과값을 리턴받으려고 하지 말고, 결과값을 통해 처리할 로직을 콜백 함수로 넘겨야 함
+
+서버로부터 데이터를 받아오는 경우 실행 결과가 다름을 알 수 있다.
+
+- - -
+* [1]
+	* 비동기(Asynchronous) 함수: 호출부에서 실행 결과를 기다리지 않아도 되는 함수
+	* 동기(Synchronous) 함수: 호출부에서 실행 결과가 리턴될 때까지 기다려야 하는 함수
+* [2]
+	* 비동기 함수의 Non-blocking 이점 때문에, 자바스크립트처럼 싱글 스레드 환경에서 실행되는 언어에서 광범위하게 사용
+	* 비동기 함수를 사용하면 로직을 순차적으로 처리할 필요가 없기 때문에 동시 처리에서 동기 함수 대비 유리
+* [3]  
+	```javascript
+	<script>
+		// 예제 1
 		alert('A');
 		setTimeout(function () {
 			alert('B');
 		}, 0);
 		alert('C');
-	</script>
-	```
-	* 실행 결과: A → C → B
-* 예제 2  
-	```javascript
-	<script>
+		// 실행 결과: A → C → B
+		
+		// 예제 2
 		for (var i = 0; i < 3; i++) {
 			setTimeout(function () {
 				alert(i);
 			}, 0);
 		}
+		// 실행 결과: 3 → 3 → 3
 	</script>
 	```
-	* 실행 결과: 3 → 3 → 3
-
-위 코드의 결과를 이해하기 위해 아래 내용을 알아야 한다.
-
-* JavaScript 엔진은 Single Thread임
-	* ∴ 동시에 두 가지 작업 불가
-* JavaScript 엔진은 비동기 처리가 가능하도록 설계됨
-* .
-
-- - -
-
-* 콜백함수를 사용하는 이유는 비동기 처리를 하기 위함
-	* 자바스크립트의 비동기 처리란, 특정 코드가 종료되지 않은 상태더라도 대기 않고 다음 코드를 실행하는 특성
-	* 서버에 대한 응답을 언제까지 기다릴 수 없기 때문에 비동기 처리가 필요
-* 즉, 콜백함수는 특정 이벤트 발생 후 수행될 함수를 의미
-
-
 
 ##### [목차로 이동](#목차)
 
@@ -474,7 +530,23 @@ getScore();		// Return "Chamahk scored 5"
 
 ##### [목차로 이동](#목차)
 
+### 프로미스
+
+
+##### [목차로 이동](#목차)
+
 ## 참고
 * [JavaScript 핵심 개념 알아보기 - JS Flow](https://www.inflearn.com/course/%ED%95%B5%EC%8B%AC%EA%B0%9C%EB%85%90-javascript-flow/dashboard)
+* [자바스크립트 비동기 처리 1부 - Callback](https://www.daleseo.com/js-async-callback/)
+* [자바스크립트 비동기 처리 2부 - Promise](https://www.daleseo.com/js-async-promise/)
+- - -
+* [자바스크립트 비동기 처리와 콜백 함수](https://joshua1988.github.io/web-development/javascript/javascript-asynchronous-operation/)
+* [JavaScript 비동기 처리를 위한 Promise 이해하기](https://velog.io/@cyranocoding/2019-08-02-1808-%EC%9E%91%EC%84%B1%EB%90%A8-5hjytwqpqj)
+* [Callback 지옥..과 그 해결](https://medium.com/dream-youngs/callback-%EC%A7%80%EC%98%A5-%EA%B3%BC-%EA%B7%B8-%ED%95%B4%EA%B2%B0-2ab583b7607a)
+* [콜백 함수](https://victorydntmd.tistory.com/48)
+* [콜백 지옥](https://librewiki.net/wiki/%EC%BD%9C%EB%B0%B1_%EC%A7%80%EC%98%A5)
+- - -
+* [자바스크립트 엔진 등](https://velog.io/@imacoolgirlyo/JS-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%97%94%EC%A7%84-Event-Loop-Event-Queue-Call-Stack)
+* [자바스크립트는 어떻게 작동하는가: V8](https://engineering.huiseoul.com/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%9E%91%EB%8F%99%ED%95%98%EB%8A%94%EA%B0%80-v8-%EC%97%94%EC%A7%84%EC%9D%98-%EB%82%B4%EB%B6%80-%EC%B5%9C%EC%A0%81%ED%99%94%EB%90%9C-%EC%BD%94%EB%93%9C%EB%A5%BC-%EC%9E%91%EC%84%B1%EC%9D%84-%EC%9C%84%ED%95%9C-%EB%8B%A4%EC%84%AF-%EA%B0%80%EC%A7%80-%ED%8C%81-6c6f9832c1d9)
 
 ##### [목차로 이동](#목차)
