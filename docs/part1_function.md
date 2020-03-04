@@ -393,7 +393,7 @@ DB나 API 연동 없이 유저 ID를 인자로 받아 유저 객체를 리턴하
 
 <img src="../img/ch_05_01.png" width="450" height="25"></br>
 
-그렇다면 콜백 함수는 단지 스타일의 차이일까? 아니다. 자바스크립트 특유의 비동기 처리[1]를 하기 위해서는 콜백 함수가 필요하다[2]. 만약 실제 프로젝트에서 DB나 API를 통해 유저 데이터를 얻어 오는 경우를 생각해 위 코드를 수정해보자. 필연적으로 발생하는 Latency를 가정하기 위해 `setTimeout()` 함수를 사용했다.
+그렇다면 콜백 함수는 단지 스타일의 차이일까? 아니다. 자바스크립트 특유[1]의 비동기 처리[2]를 하기 위해서는 콜백 함수가 필요하다[3]. 만약 실제 프로젝트에서 DB나 API를 통해 유저 데이터를 얻어 오는 경우를 생각해 위 코드를 수정해보자. 필연적으로 발생하는 Latency를 가정하기 위해 `setTimeout()` 함수를 사용했다.
 
 * 콜백함수 미사용  
 	```javascript
@@ -417,7 +417,7 @@ DB나 API 연동 없이 유저 ID를 인자로 받아 유저 객체를 리턴하
 	```
 	* 실행 결과  
 		<img src="../img/ch_05_02.png" width="450" height="70"></br>
-		* `setTimeout()`[3]은 비동기 함수의 호출이므로 실행이 완료될 때까지 기다리지 않고 user 반환
+		* `setTimeout()`[4]은 비동기 함수의 호출이므로 실행이 완료될 때까지 기다리지 않고 user 반환
 		* ∴ `findUser(1)`은 undefined를 리턴
 * 콜백함수 사용  
 	```javascript
@@ -448,12 +448,15 @@ DB나 API 연동 없이 유저 ID를 인자로 받아 유저 객체를 리턴하
 
 - - -
 * [1]
+	* 자바스크립트 엔진은 싱글 쓰레드임(∴ 동시에 두 가지 작업 불가)
+	* 따라서 자바스크립트 엔진은 비동기 처리 가능하도록 설계
+* [2]
 	* 비동기(Asynchronous) 함수: 호출부에서 실행 결과를 기다리지 않아도 되는 함수
 	* 동기(Synchronous) 함수: 호출부에서 실행 결과가 리턴될 때까지 기다려야 하는 함수
-* [2]
+* [3]
 	* 비동기 함수의 Non-blocking 이점 때문에, 자바스크립트처럼 싱글 스레드 환경에서 실행되는 언어에서 광범위하게 사용
 	* 비동기 함수를 사용하면 로직을 순차적으로 처리할 필요가 없기 때문에 동시 처리에서 동기 함수 대비 유리
-* [3]  
+* [4]  
 	```javascript
 	<script>
 		// 예제 1
@@ -531,7 +534,38 @@ DB나 API 연동 없이 유저 ID를 인자로 받아 유저 객체를 리턴하
 ##### [목차로 이동](#목차)
 
 ### 프로미스
+위에서 자바스크립트[1]의 비동기 처리를 위해 콜백 함수(다른 함수의 인자로 사용)를 이용했다. 단순한 경우 이러한 전통적인 방식의 비동기 처리도 문제가 없으나, 콜백 함수를 중첩해서 연쇄적으로 호출해야 하는 경우 코드의 가독성이 현저하게 떨어지게 된다. 이 문제를 해결해주는 방법 중 하나가 Promise다. [위](#필요성)에서 살펴봤던 코드는 Promise를 사용해 아래와 같이 수정할 수 있다.
 
+```javascript
+<script>
+    findUser(1).then(function(user) {
+        console.log("user:", user);
+    });
+
+    function findUser(id) {
+        return new Promise(function(resolve) {
+            setTimeout(function() {
+                console.log("Wait 0.1 sec.");
+                const user = {
+                    id: id,
+                    name: "User" + id,
+                    email: id + "@test.com"
+                };
+                resolve(user);
+            }, 100);
+        });
+    }
+</script>
+```
+
+- - -
+* [1]
+	* Non-blocking 코드 지향 자바스크립트에선 비동기 처리가 필수  
+	  (Java로 말하자면 `Future` 클래스가 담당)
+	* [동기와 비동기의 개념과 차이](https://private.tistory.com/24)
+	* [초보자를 위한 동시성과 Future](https://hamait.tistory.com/748)
+* [2]
+	* .
 
 ##### [목차로 이동](#목차)
 
@@ -548,5 +582,8 @@ DB나 API 연동 없이 유저 ID를 인자로 받아 유저 객체를 리턴하
 - - -
 * [자바스크립트 엔진 등](https://velog.io/@imacoolgirlyo/JS-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%97%94%EC%A7%84-Event-Loop-Event-Queue-Call-Stack)
 * [자바스크립트는 어떻게 작동하는가: V8](https://engineering.huiseoul.com/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%9E%91%EB%8F%99%ED%95%98%EB%8A%94%EA%B0%80-v8-%EC%97%94%EC%A7%84%EC%9D%98-%EB%82%B4%EB%B6%80-%EC%B5%9C%EC%A0%81%ED%99%94%EB%90%9C-%EC%BD%94%EB%93%9C%EB%A5%BC-%EC%9E%91%EC%84%B1%EC%9D%84-%EC%9C%84%ED%95%9C-%EB%8B%A4%EC%84%AF-%EA%B0%80%EC%A7%80-%ED%8C%81-6c6f9832c1d9)
+- - -
+* [Blocking-NonBlocking-Synchronous-Asynchronous](https://homoefficio.github.io/2017/02/19/Blocking-NonBlocking-Synchronous-Asynchronous/)
+* [Java8 CompletableFuture 사용하기](https://www.hungrydiver.co.kr/bbs/detail/develop?id=2&scroll=comment)
 
 ##### [목차로 이동](#목차)
