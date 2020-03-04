@@ -30,89 +30,95 @@
 ### 용어
 기본적인 의미를 넘어, 자바스크립트 한정해서 개념을 기록한다.
 
-* 함수 호출(≠ 함수 선언)
-	* 함수는 호출될 때 범위 내에 있어야 함
-		* 그러나 함수의 선언은 아래 예에서와 같이 `호이스팅`될 수 있음(호출 아래에 선언문 존재)  
-			```javascript
-			console.log(square(5));
-			/* ... */
-			function square(n) {
-				return n * n;
-			}
-			```
-			* 함수의 범위는 함수가 선언된 곳이거나, 전체 프로그램에서의 최상위 레벨(전역)에 선언된 곳임
-		* 하지만 `함수 호이스팅`은 함수 선언과 함께 작동하고 함수 표현식에서는 동작 않음  
-			```javascript
-			console.log(square);		// square는 초기값으로 undefined를 가지고 호이스트된다.
-			console.log(square(5));	// TypeError: square는 함수가 아니다.
-			square = function(n) {
-				return n * n;
-			}
-			```
-	* 함수 호출의 다양한 방법들 존재
-		* 동적 호출
-		* 가변 인수
-		* 함수 호출의 맥락이 런타임에서 결정된 특정한 객체로 설정될 필요가 있는 경우
-			* 함수가 그 자체로 객체이고 이들 객체는 차례로 메서드([`Function`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Function) 객체를 참조)를 갖고 있음
-			* [`apply()`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) 메서드
-* 매개변수
-	* 기본 자료형인 경우
-		* 예를 들어 `number`와 같은 경우 **값으로** 함수에 전달
-		* 그리고 함수가 매개변수의 값을 바꾸더라도 이는 **전역적으로** 또는 **함수를 호출하는 곳**에는 반영되지 않음  
-			```javascript
-			function square(number) {
-				return number * number;
-			}
-			```
-	* 기본 자료형이 아닌 경우
-		* 예를 들어 `Array`나 `사용자가 정의한 객체`와 같은 것을 전달
-		* 함수가 객체의 속성을 변하게 하는 경우에, 다음의 예처럼 그 변화는 **함수 외부**에서 볼 수 있음  
-			```javascript
-			function myFunc(theObject) {
-				theObject.make = "Toyota";
-			}
-			
-			var mycar = {make: "Honda", model: "Accord", year:1998};
-			var x, y;
-			
-			x = mycar.make;		// x의 값은 "Honda" 입니다.
-			
-			myFunc(mycar);
-			y = mycar.make;		// y의 값은 "Toyota" 입니다(make 속성은 myFunc에서 변경됨).
-			```
-* 함수의 범위
-	* 함수가 정의된 범위 내에서 정의된 모든 변수나 함수는 액세스 가능
-		* 즉, 전역 함수는 모든 전역 변수를 액세스 가능
-	* 다른 함수 내에 정의된 함수는 부모 함수와 부모 함수가 액세스할 수 있는 다른 변수에 정의된 모든 변수 액세스 가능
-	* 함수 내에서 정의된 변수는 변수가 함수의 범위에서만 정의되어 있기 때문에, 함수 외부에서 액세스 가능(?)
-		* [전역변수와 지역변수](https://www.codingfactory.net/10401)
-	```javascript
-	// The following variables are defined in the global scope
-	var num1 = 20,
-	    num2 = 3,
-	    name = "Chamahk";
-	
-	// This function is defined in the global scope
-	function multiply() {
-		return num1 * num2;
-	}
-	
-	multiply();		// Return 60
-	
-	// A nested function example
-	function getScore() {
-		var num1 = 2,
-		    num2 = 3;
-		
-		function add() {
-		    return name + " scored " + (num1 + num2);
+#### 함수 호출(≠ 함수 선언)
+* 함수는 호출될 때 범위 내에 있어야 함
+	* 그러나 함수의 선언은 아래 예에서와 같이 `호이스팅`될 수 있음(호출 아래에 선언문 존재)  
+		```javascript
+		console.log(square(5));
+		/* ... */
+		function square(n) {
+			return n * n;
+		}
+		```
+		* 함수의 범위는 함수가 선언된 곳이거나, 전체 프로그램에서의 최상위 레벨(전역)에 선언된 곳임
+	* 하지만 `함수 호이스팅`은 함수 선언과 함께 작동하고 함수 표현식에서는 동작 않음  
+		```javascript
+		console.log(square);		// square는 초기값으로 undefined를 가지고 호이스트된다.
+		console.log(square(5));	// TypeError: square는 함수가 아니다.
+		square = function(n) {
+			return n * n;
+		}
+		```
+* 함수 호출의 다양한 방법들 존재
+	* 동적 호출
+	* 가변 인수
+	* 함수 호출의 맥락이 런타임에서 결정된 특정한 객체로 설정될 필요가 있는 경우
+		* 함수가 그 자체로 객체이고 이들 객체는 차례로 메서드([`Function`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Function) 객체를 참조)를 갖고 있음
+		* [`apply()`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) 메서드
+
+##### [목차로 이동](#목차)
+
+#### 매개변수
+* 기본 자료형인 경우
+	* 예를 들어 `number`와 같은 경우 **값으로** 함수에 전달
+	* 그리고 함수가 매개변수의 값을 바꾸더라도 이는 **전역적으로** 또는 **함수를 호출하는 곳**에는 반영되지 않음  
+		```javascript
+		function square(number) {
+			return number * number;
+		}
+		```
+* 기본 자료형이 아닌 경우
+	* 예를 들어 `Array`나 `사용자가 정의한 객체`와 같은 것을 전달
+	* 함수가 객체의 속성을 변하게 하는 경우에, 다음의 예처럼 그 변화는 **함수 외부**에서 볼 수 있음  
+		```javascript
+		function myFunc(theObject) {
+			theObject.make = "Toyota";
 		}
 		
-		return add();
+		var mycar = {make: "Honda", model: "Accord", year:1998};
+		var x, y;
+		
+		x = mycar.make;		// x의 값은 "Honda" 입니다.
+		
+		myFunc(mycar);
+		y = mycar.make;		// y의 값은 "Toyota" 입니다(make 속성은 myFunc에서 변경됨).
+		```
+
+##### [목차로 이동](#목차)
+
+#### 함수의 범위
+* 함수가 정의된 범위 내에서 정의된 모든 변수나 함수는 액세스 가능
+	* 즉, 전역 함수는 모든 전역 변수를 액세스 가능
+* 다른 함수 내에 정의된 함수는 부모 함수와 부모 함수가 액세스할 수 있는 다른 변수에 정의된 모든 변수 액세스 가능
+	* 함수 내에서 정의된 변수는 변수가 함수의 범위에서만 정의되어 있기 때문에, 함수 외부에서 액세스 가능(?)
+* 예외: [전역변수와 지역변수](https://www.codingfactory.net/10401)
+```javascript
+// The following variables are defined in the global scope
+var num1 = 20,
+	num2 = 3,
+	name = "Chamahk";
+
+// This function is defined in the global scope
+function multiply() {
+	return num1 * num2;
+}
+
+multiply();		// Return 60
+
+// A nested function example
+function getScore() {
+	var num1 = 2,
+		num2 = 3;
+	
+	function add() {
+		return name + " scored " + (num1 + num2);
 	}
 	
-	getScore();		// Return "Chamahk scored 5"
-	```
+	return add();
+}
+
+getScore();		// Return "Chamahk scored 5"
+```
 
 ##### [목차로 이동](#목차)
 
@@ -132,7 +138,7 @@
 		```
 		* 이름이 있는 함수를 `선언적 함수`라 부름
 * 차이점
-	* 실행 순서: 웹 브라우저는 script 태그 내부의 내용을 한 줄씩 읽기 전에 선언적 함수부터 읽음
+	1. 실행 순서: 웹 브라우저는 script 태그 내부의 내용을 한 줄씩 읽기 전에 선언적 함수부터 읽음
 		* 익명 함수의 재정의 - 오류 발생  
 			```javascript
 			<script>
@@ -161,7 +167,7 @@
 			</script>
 			```
 			* 실행 결과는 함수 A가 출력됨
-	* 사용
+	2. 사용
 		* 익명 함수는 함수를 다른 함수의 매개변수로 전달할 때 편리  
 			```javascript
 			// 익명 함수(함수 표현식)로 정의된 함수를 인자로 받아,
@@ -294,7 +300,7 @@
 				}
 			</script>
 			```
-			* 내부 함수는 내부 함수를 포함하는 함수에서만 사용 가능
+			* [내부 함수는 내부 함수를 포함하는 함수에서만 사용 가능](#함수의-범위)
 			* 따라서 pythagoras() 함수 외부에서는 square() 함수 사용 불가
 			* 추가
 				* jQuery는 선언적 함수 대부분을 내부 함수로 작성!
