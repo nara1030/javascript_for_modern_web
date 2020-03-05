@@ -6,6 +6,7 @@
 3. [인라인 이벤트 모델](#인라인-이벤트-모델)
 4. [디폴트 이벤트 제거](#디폴트-이벤트-제거)
 5. [이벤트 전달](#이벤트-전달)
+6. [참고](#참고)
 
 ## 용어
 ```javascript
@@ -114,5 +115,14 @@
 
 * 이벤트 버블링
 * 이벤트 캡쳐
+
+- - -
+* [이벤트 전달](https://codedragon.tistory.com/5738)
+* [이벤트 버블링, 이벤트 캡쳐, 이벤트 위임까지](https://joshua1988.github.io/web-development/javascript/event-propagation-delegation/)
+
+##### [목차로 이동](#목차)
+
+## 참고
+
 
 ##### [목차로 이동](#목차)

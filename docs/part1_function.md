@@ -13,6 +13,7 @@
 	* [콜백함수](#콜백함수)
 	* [클로저](#클로저)
 	* [프로미스](#프로미스)
+	* [동시성과 병렬성](#동시성과-병렬성)
 3. [참고](#참고)
 
 ## 개요
@@ -569,31 +570,46 @@ DB나 API 연동 없이 유저 ID를 인자로 받아 유저 객체를 리턴하
 * [1]
 	* Non-blocking 코드 지향 자바스크립트에선 비동기 처리가 필수  
 	  (Java로 말하자면 `Future` 클래스가 담당)
-	* [동기와 비동기의 개념과 차이](https://private.tistory.com/24)
-	* [초보자를 위한 동시성과 Future](https://hamait.tistory.com/748)
-* [2]
-	* .
+
+##### [목차로 이동](#목차)
+
+### 동시성과 병렬성
+1. 동시성(Concurrency)과 병렬성(Parallelism)
+2. 동기(Synchronous)와 비동기(Asynchronous)
+	* 호출하는 함수가 호출되는 함수의 작업 완료 여부를 신경 쓰느냐
+	* [예](https://private.tistory.com/24)
+		* A가 B에게 10,000원을 송금 → 동기
+		* 학생이 시험지를 선생에게 제출 → 비동기
+3. 블로킹(Blocking)과 논블로킹(Non-Blocking)
+	* 호출되는 함수가 바로 리턴하느냐 마느냐  
+	  (즉, 호출한 함수에게 바로 제어권이 넘어가느냐 마느냐)
+	* 예
+		* 학생이 선생에게 시험지를 건낸 후 대기 → 블로킹
+		* 학생이 선생에게 시험지 건낸 후 다른 일 진행 → 논블로킹
+
+- - -
+* [초보자를 위한 동시성과 Future](https://hamait.tistory.com/748)
+* [Blocking-NonBlocking-Synchronous-Asynchronous](https://homoefficio.github.io/2017/02/19/Blocking-NonBlocking-Synchronous-Asynchronous/)
+* [멈추지 않고 기다리기(Non-blocking)와 비동기(Asynchronous) 그리고 동시성(Concurrency)](https://tech.peoplefund.co.kr/2017/08/02/non-blocking-asynchronous-concurrency.html)
+* [논 블로킹 알고리즘](https://parkcheolu.tistory.com/33)
+* [Java8 CompletableFuture 사용하기](https://www.hungrydiver.co.kr/bbs/detail/develop?id=2&scroll=comment)
+* [Java NIO는 생각만큼 non-blocking 하지 않다](https://homoefficio.github.io/2016/08/06/Java-NIO%EB%8A%94-%EC%83%9D%EA%B0%81%EB%A7%8C%ED%81%BC-non-blocking-%ED%95%98%EC%A7%80-%EC%95%8A%EB%8B%A4/)
 
 ##### [목차로 이동](#목차)
 
 ## 참고
 * [JavaScript 핵심 개념 알아보기 - JS Flow](https://www.inflearn.com/course/%ED%95%B5%EC%8B%AC%EA%B0%9C%EB%85%90-javascript-flow/dashboard)
-* [자바스크립트 비동기 처리 1부 - Callback](https://www.daleseo.com/js-async-callback/)
-* [자바스크립트 비동기 처리 2부 - Promise](https://www.daleseo.com/js-async-promise/)
-- - -
-* [자바스크립트 비동기 처리와 콜백 함수](https://joshua1988.github.io/web-development/javascript/javascript-asynchronous-operation/)
-* [JavaScript 비동기 처리를 위한 Promise 이해하기](https://velog.io/@cyranocoding/2019-08-02-1808-%EC%9E%91%EC%84%B1%EB%90%A8-5hjytwqpqj)
-* [Callback 지옥..과 그 해결](https://medium.com/dream-youngs/callback-%EC%A7%80%EC%98%A5-%EA%B3%BC-%EA%B7%B8-%ED%95%B4%EA%B2%B0-2ab583b7607a)
-* [콜백 함수](https://victorydntmd.tistory.com/48)
-* [콜백 지옥](https://librewiki.net/wiki/%EC%BD%9C%EB%B0%B1_%EC%A7%80%EC%98%A5)
-- - -
-* [자바스크립트 엔진 등](https://velog.io/@imacoolgirlyo/JS-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%97%94%EC%A7%84-Event-Loop-Event-Queue-Call-Stack)
-* [자바스크립트는 어떻게 작동하는가: V8](https://engineering.huiseoul.com/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%9E%91%EB%8F%99%ED%95%98%EB%8A%94%EA%B0%80-v8-%EC%97%94%EC%A7%84%EC%9D%98-%EB%82%B4%EB%B6%80-%EC%B5%9C%EC%A0%81%ED%99%94%EB%90%9C-%EC%BD%94%EB%93%9C%EB%A5%BC-%EC%9E%91%EC%84%B1%EC%9D%84-%EC%9C%84%ED%95%9C-%EB%8B%A4%EC%84%AF-%EA%B0%80%EC%A7%80-%ED%8C%81-6c6f9832c1d9)
-- - -
-* [Blocking-NonBlocking-Synchronous-Asynchronous](https://homoefficio.github.io/2017/02/19/Blocking-NonBlocking-Synchronous-Asynchronous/)
-* [Java8 CompletableFuture 사용하기](https://www.hungrydiver.co.kr/bbs/detail/develop?id=2&scroll=comment)
-* [Java NIO는 생각만큼 non-blocking 하지 않다](https://homoefficio.github.io/2016/08/06/Java-NIO%EB%8A%94-%EC%83%9D%EA%B0%81%EB%A7%8C%ED%81%BC-non-blocking-%ED%95%98%EC%A7%80-%EC%95%8A%EB%8B%A4/)
-* [멈추지 않고 기다리기(Non-blocking)와 비동기(Asynchronous) 그리고 동시성(Concurrency)](https://tech.peoplefund.co.kr/2017/08/02/non-blocking-asynchronous-concurrency.html)
-* [논 블로킹 알고리즘](https://parkcheolu.tistory.com/33)
+* [자바스크립트란?](https://ko.javascript.info/intro)
+* [자바스크립트는 어떻게 작동하는가: 이벤트 루프와 비동기 프로그래밍의 부상, async/await을 이용한 코딩 팁 다섯 가지](https://engineering.huiseoul.com/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%9E%91%EB%8F%99%ED%95%98%EB%8A%94%EA%B0%80-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%A3%A8%ED%94%84%EC%99%80-%EB%B9%84%EB%8F%99%EA%B8%B0-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%EC%9D%98-%EB%B6%80%EC%83%81-async-await%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EC%BD%94%EB%94%A9-%ED%8C%81-%EB%8B%A4%EC%84%AF-%EA%B0%80%EC%A7%80-df65ffb4e7e)
+* DaleSeo
+	* [자바스크립트 비동기 처리 1부 - Callback](https://www.daleseo.com/js-async-callback/)
+	* [자바스크립트 비동기 처리 2부 - Promise](https://www.daleseo.com/js-async-promise/)
+* DEV_NUNU
+	* [자바스크립트 호출 스택 이해하기](https://new93helloworld.tistory.com/358)
+	* [자바스크립트 호출 스택 동작 예제](https://new93helloworld.tistory.com/361)
+* CAPTAIN PANGYO
+	* [1탄 - 자바스크립트 비동기 처리와 콜백 함수](https://joshua1988.github.io/web-development/javascript/javascript-asynchronous-operation/)
+	* [2탄 - 자바스크립트 Promise 쉽게 이해하기](https://joshua1988.github.io/web-development/javascript/promise-for-beginners/)
+	* [3탄 - 자바스크립트 async와 await](https://joshua1988.github.io/web-development/javascript/js-async-await/)
 
 ##### [목차로 이동](#목차)
