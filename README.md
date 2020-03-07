@@ -23,7 +23,7 @@
 	* [이벤트](https://github.com/nara1030/javascript_for_modern_web/blob/master/docs/part1_event.md)
 	* 예외 처리
 2. jQuery
-	* 기본
+	* [기본](https://github.com/nara1030/javascript_for_modern_web/blob/master/docs/part2_basic.md)
 	* 문서 객체 선택과 탐색
 	* 문서 객체 조작
 	* 이벤트
