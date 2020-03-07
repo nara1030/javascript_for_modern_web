@@ -200,72 +200,87 @@ while 반복문이 조건에 비중을 두는 반복문이라면, for 반복문�
 		for(var i = 0; i < <반복횟수>; i++) {
 			<문장>
 		}
-		```
-	* for 반복문과 배열
-		* 0으로 시작해서 length 바로 전까지 반복 실행하는 이유는 배열의 인덱스가 0에서 시작하기 때문
-			* 이뿐만 아니라 대부분의 프로그래밍 언어에서 `월`을 셀 때도 1이 아닌 0부터 셈  
-		```javascript
-		<script>
-			var array = ['포도', '사과', '바나나', '망고'];
+		
+		// 예
+		var array = ['포도', '사과', '바나나', '망고'];
 			
-			for(var i = 0; i < array.length; i++){
-				alert(array[i]);
-			}
-		</script>
+		for(var i = 0; i < array.length; i++){
+			alert(array[i]);
+		}
 		```
+	* 설명
+		* 0으로 시작해서 length 바로 전까지 반복 실행하는 이유는 배열의 인덱스가 0에서 시작하기 때문
+		* 이뿐만 아니라 대부분의 프로그래밍 언어에서 `월`을 셀 때도 1이 아닌 0부터 셈
 2. for in 반복문
 	* 기본 형태  
 		```javascript
 		for(var <반복 변수> in <배열 또는 객체>) {
 			<문장>
 		}
+		
+		// 예
+		var array = ['포도', '사과', '바나나', '망고'];
+
+		for(var i in array) {
+			alert(array[i]);
+		}
 		```
-	* 예  
-		```javascript
-		<script>
-			var array = ['포도', '사과', '바나나', '망고'];
-			
-			for(var i in array) {
-				alert(array[i]);
-			}
-		</script>
-		```
-	* 사용 이유
-		* 자바스크립트는 배열(~~배열이 객체이긴 하지만 이렇게 표현함~~)이나 객체를 더욱 쉽게 다룰 수 있게 for in 반복문 제공
-			* 단, 자바([향상된 for문](https://library1008.tistory.com/66))와 다르게 변수의 요소가 아닌 인덱스를 빼서 온다는 특징이 있음
-				* 자바의 향상된 for문은 Read only임(수정 불가)
+	* 설명
+		* 자바스크립트는 배열이나 객체를 더욱 쉽게 다룰 수 있게 for in 반복문 제공  
+		  (객체의 key값과 value값을 뽑아내는데 유용)
+		* 단, 자바([향상된 for문](https://library1008.tistory.com/66))와 다르게 변수의 요소가 아닌 인덱스를 빼서 온다는 특징이 있음
+			* 자바의 향상된 for문은 Read only임(수정 불가)
 3. for of 반복문
-	* 반복 변수에 인덱스가 아닌 요소가 들어가도록 ECMAScript 6에서 추가(모든 버전의 인터넷 익스플로러에서 사용 불가)
+	* 기본 형태  
+		```javascript
+		// for of문
+		for(variable of iterable) {
+			statement
+		}
+		
+		// for in문
+		for (variable in object) { ... }
+		```
+	* 설명
 		* for of 반복문은 배열 이외에도 다양한 것(문자열, 맵, 세트 등)과 조합해서 사용할 수 있음  
-			```javascript
-			// for of문
-			for(variable of iterable) {
-				statement
-			}
-			
-			// for in문
-			for (variable in object) { ... }
-			```
-	* 비교
-		* for in 반복문 - ECMAScript 5  
-			```javascript
-			<script>
-				var array = [1, 2, 3, 4];
-				for(var i in array) {
-					alert(i + "번째 요소는 " + array[i] + "입니다.");
-				}
-			</script>
-			```
-		* for of 반복문 - ECMAScript 6  
-			```javascript
-			<script>
-				for(const element of [1, 2, 3, 4]){
-					alert(`요소는 ${element}입니다.`); // 템플릿 문자열 - ECMAScript 6
-				}
-			</script>
-			```
-	* 단, for of 반복문은 현재 몇 번 반복했는지 알 수 없음
-		* 따라서 따로 변수를 만들어서 확인해야 함  
+		  (for of 반복문은 ES6에 추가된 새로운 컬렉션 전용 반복 구문)
+		* for of 구문을 사용하기 위해선 컬렉션 객체가 Symbol.iterator 속성을 갖고 있어야 함
+4. foreach문
+	* 기본 형태  
+		```javascript
+		var fruits = ["Apple","Banana","Orange","Strawberry"];
+		fruits.forEach(function (item, index, array) {
+			console.log(item, index);
+		});
+		```
+	* 설명
+		* 오직 Array 객체에서만 사용 가능한 메소드  
+		  (ES6부터는 Map, Set 지원)
+		* forEach 구문의 각 인자로 콜백 함수를 등록할 수 있고, 배열의 각 요소들이 반복될 때 이 콜백 함수가 호출
+
+- - -
+for in 반복문과 for of 반복문에 관해 살펴본다.
+
+* for in 반복문 - ECMAScript 5  
+	```javascript
+	<script>
+		var array = [1, 2, 3, 4];
+		for(var i in array) {
+			alert(i + "번째 요소는 " + array[i] + "입니다.");
+		}
+	</script>
+	```
+	* 객체의 모든 열거 가능한 속성에 대한 반복
+* for of 반복문 - ECMAScript 6  
+	```javascript
+	<script>
+		for(const element of [1, 2, 3, 4]){
+			alert(`요소는 ${element}입니다.`); // 템플릿 문자열 - ECMAScript 6
+		}
+	</script>
+	```
+	* Symbol.iterator 속성을 가지는 컬렉션 전용
+* 단, for of 반복문은 현재 몇 번 반복했는지 알 수 없음  
 	```javascript
 	<script>
 		let i = 0;
@@ -275,6 +290,7 @@ while 반복문이 조건에 비중을 두는 반복문이라면, for 반복문�
 		}
 	</script>
 	```
+	* 따라서 따로 변수를 만들어서 확인해야 함
 
 ##### [목차로 이동](#목차)
 
